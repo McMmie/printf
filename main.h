@@ -25,5 +25,8 @@ void rot13(char *str);
 
 char *itoa(int i, char *strout, int base, bool isUnsigned);
 
-int _buffer(char *buff, int size)
+int _buffer(char *buff, int size);
+
+char *_toupper(char *str);
+
 #endif
