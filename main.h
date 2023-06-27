@@ -21,4 +21,5 @@ void print_float(double val, int prec);
 
 void print_ptr(void *value);
 
+void rot13(char *str);
 #endif
