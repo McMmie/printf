@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include <stdint.h>
 /**
  * print_ptr - prints pointers
  * @value: a void pointer
@@ -9,12 +9,14 @@
 
 void print_ptr(void *value)
 {
-	uintptr_t ptr = (uintptr)value;
+	uintptr_t ptr = (uintptr_t)value;
 	char buffer[16];
+	int i;
+	int digit;
 
-	for (int i = 0; i < 8; i++)
+	for (i = 0; i < 8; i++)
 	{
-		int digit = (ptr >> (28 - 4 * i)) & 0xF;
+		digit = (ptr >> (28 - 4 * i)) & 0xF;
 
 		if (digit < 10)
 		{

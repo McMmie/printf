@@ -3,6 +3,8 @@
 /****FUNCTIONS****/
 int _printf(const char *format, ...);
 
+int _putchar(char c);
+
 void print_str(char *s);
 
 char *_strcpy(char *s1, char *s2);
