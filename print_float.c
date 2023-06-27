@@ -15,7 +15,7 @@ void print_float(double val, int prec)
 	int num = (int)val;
 	char buffer[20]; /*to be adjusted to needed size*/
 
-	print_int(num, output, 10);
+	print_int(num, buffer, 10);
 	write(STDOUT_FILENO, buffer, _strlen(buffer));
 
 	/*printing the decimal point*/
