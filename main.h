@@ -22,4 +22,8 @@ void print_float(double val, int prec);
 void print_ptr(void *value);
 
 void rot13(char *str);
+
+char *itoa(int i, char *strout, int base, bool isUnsigned);
+
+int _buffer(char *buff, int size)
 #endif
