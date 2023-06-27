@@ -1,6 +1,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include "main.h"
+#include <stdbool.h>
 
 /**
  *_printf - This is a complete replica of the printf function
@@ -11,9 +12,11 @@
 
 int _printf(const char *format, ...)
 {
+	va_list arg;
+	int i = 0, j = 0, k;
 	const char *countchar;
 	char *s;
-	va_list arg;
+       char buff[100] = {0}, tmp[20];
 
 	va_start(arg, format);
 	for (countchar = format; *countchar != '\0'; countchar++)
@@ -41,12 +44,36 @@ int _printf(const char *format, ...)
 			break;
 			/*prints integer*/
 		case 'i':
-			print_int(va_arg(arg, int), ,10);
+			print_int(va_arg(arg, int),tmp, 10);
 			break;
 			/*prints decimal integer*/
 		case 'd':
-			print_int(va_arg(arg, int), ,10);
+			{
+			print_int(va_arg(arg, int), tmp, 10);
 			break;
+			}
+			/*prints octal*/
+		case 'o':
+			{
+				_itoa(va_arg(arg, int), tmp, 8, true);
+				_strcpy(&buff[j], tmp);
+				j += _strlen(tmp);
+			}
+			/*prints hexadecimal*/
+		case 'x':
+			{
+				_itoa(va_arg(arg, int), tmp, 16, true);
+				_strcpy(&buff[j], tmp);
+				j += _strlen(tmp);
+			}
+			/*prints hexadecimal in uppercase*/
+		case 'X':
+			{
+				_itoa(va_arg(arg, int), tmp, 16, true);
+				_strcpy(&buff[j], tmp);
+				for (k = j; buff[k] !='\0'; k++)
+					buff[k] = _toupper(buff[k]);
+			}
 			/*prints binary integer*/	
 		case 'b':
 			int_to_binary(va_arg(arg, unsigned int));
@@ -118,6 +145,7 @@ int _printf(const char *format, ...)
 			countchar--;
 		}
 	}
+	write(fileno(strout), &buff, j)
 	va_end(arg);
-	return (0);
+	return (j);
 }
