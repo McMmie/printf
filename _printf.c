@@ -70,6 +70,50 @@ int _printf(const char *format, ...)
 		case 'p':
 			print_ptr(va_arg(arg, *void));
 			break;
+		case 'o':
+			break;
+		case 'u':
+			break;
+		case 'x':
+			break;
+		case 'X':
+			break;
+		case 'l':
+			countchar++;
+			switch (*countchar)
+			{
+			case 'd':
+				break;
+			case 'i':
+				break;
+			case 'u':
+				break;
+			case 'o':
+				break;
+			case 'x':
+				break;
+			case 'X':
+				break;
+			}
+			countchar--;
+		case 'h':
+			countchar++;
+			switch (*countchar)
+			{
+			case 'd':
+				break;
+			case 'i':
+				break;
+			case 'u':
+				break;
+			case 'o':
+				break;
+			case 'x':
+				break;
+			case 'X':
+				break;
+			}
+			countchar--;
 		}
 	}
 	va_end(arg);
