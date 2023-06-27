@@ -7,24 +7,24 @@
  * Return: binary number
  */
 
-int int_to_binary(unsigned int num)
+void int_to_binary(unsigned int num)
 {
-	int array[24], i;
+	int arraynum[24], i,j;
 
 	if (num == 0)
 	{
-		printf("0");
+		_putchar(0);
 	}
 	i = 0;
 
 	while (num > 0)
 	{
-		array[i++] = num % 2;
+		arraynum[i++] = num % 2;
 		num /= 2;
 	}
 	for (j = i - 1; j >= 0; j--)
 	{
-		printf("%d", array[j];
+		_putchar(arraynum[j]);
 	}
 
 }
