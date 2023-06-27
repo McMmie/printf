@@ -1,11 +1,14 @@
 #include <stdarg.h>
+#include <unistd.h>
 #include "main.h"
+
 /**
- *_printf - This is a complets replica of the printf function
+ *_printf - This is a complete replica of the printf function
  *@format: The arguements formats
  *
  *Return: always zero
  */
+
 int _printf(const char *format, ...)
 {
 	const char *countchar;
