@@ -78,6 +78,7 @@ int _printf(const char *format, ...)
 			break;
 		case 'X':
 			break;
+			/*adds the long length modifiers*/
 		case 'l':
 			countchar++;
 			switch (*countchar)
@@ -96,6 +97,7 @@ int _printf(const char *format, ...)
 				break;
 			}
 			countchar--;
+			/*adds the short length modifiers*/
 		case 'h':
 			countchar++;
 			switch (*countchar)
