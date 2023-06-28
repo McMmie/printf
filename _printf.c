@@ -1,7 +1,12 @@
+#include <stdio.h>
+#include <stdbool.h>
 #include <stdarg.h>
 #include <unistd.h>
+#include <limits.h>
+#include <string.h>
+#include <stdint.h>
+#include <ctype.h>
 #include "main.h"
-#include <stdbool.h>
 
 /**
  *_printf - This is a complete replica of the printf function
@@ -10,142 +15,121 @@
  *Return: always zero
  */
 
-int _printf(const char *format, ...)
+int _printf (const char * str, ...)
 {
 	va_list arg;
 	int i = 0, j = 0, k;
 	const char *countchar;
 	char *s;
        char buff[100] = {0}, tmp[20];
+       char *str_arg;
 
-	va_start(arg, format);
-	for (countchar = format; *countchar != '\0'; countchar++)
-	{
-		while (*countchar != '%' && *countchar != '\0')
-		{
-			_putchar(*countchar);
-			countchar++;
-		}
-		countchar++;
-		switch (*countchar)
-		{
-			/*prints character*/
-		case 'c':
-			_putchar(va_arg(arg, int));
-			break;
-			/*prints string*/
-		case 's':
-			s = va_arg(arg, char *);
-			print_str(s);
-			break;
-		/*prints the '%' character*/
-		case '%':
-			_putchar('%');
-			break;
-			/*prints integer*/
-		case 'i':
-			print_int(va_arg(arg, int),tmp, 10);
-			break;
-			/*prints decimal integer*/
-		case 'd':
-			{
-			print_int(va_arg(arg, int), tmp, 10);
-			break;
-			}
-			/*prints octal*/
-		case 'o':
-			{
-				_itoa(va_arg(arg, int), tmp, 8, true);
-				_strcpy(&buff[j], tmp);
-				j += _strlen(tmp);
-			}
-			/*prints hexadecimal*/
-		case 'x':
-			{
-				_itoa(va_arg(arg, int), tmp, 16, true);
-				_strcpy(&buff[j], tmp);
-				j += _strlen(tmp);
-			}
-			/*prints hexadecimal in uppercase*/
-		case 'X':
-			{
-				_itoa(va_arg(arg, int), tmp, 16, true);
-				_strcpy(&buff[j], tmp);
-				for (k = j; buff[k] !='\0'; k++)
-					buff[k] = _toupper(buff[k]);
-			}
-			/*prints binary integer*/	
-		case 'b':
-			int_to_binary(va_arg(arg, unsigned int));
-			break;
-			/*prints reversed string*/
-		case 'r':
-			s = va_arg(arg, char *);
-			print_str(reverse(s));
-			break;
-			/*prints float values*/
-		case 'f':
-			print_float(va_arg(arg, double), );
-			break;
-			/*prints rot13'ed function*/
-		case 'R':
-			s = va_arg(arg, char *);
-			rot13(s);
-			print_str(s);
-			break;
-			/*prints pointer address*/
-		case 'p':
-			print_ptr(va_arg(arg, *void));
-			break;
-		case 'o':
-			break;
-		case 'u':
-			break;
-		case 'x':
-			break;
-		case 'X':
-			break;
-			/*adds the long length modifiers*/
-		case 'l':
-			countchar++;
-			switch (*countchar)
-			{
-			case 'd':
-				break;
-			case 'i':
-				break;
-			case 'u':
-				break;
-			case 'o':
-				break;
-			case 'x':
-				break;
-			case 'X':
-				break;
-			}
-			countchar--;
-			/*adds the short length modifiers*/
-		case 'h':
-			countchar++;
-			switch (*countchar)
-			{
-			case 'd':
-				break;
-			case 'i':
-				break;
-			case 'u':
-				break;
-			case 'o':
-				break;
-			case 'x':
-				break;
-			case 'X':
-				break;
-			}
-			countchar--;
-		}
-	}
-	write(fileno(strout), &buff, j)
-	va_end(arg);
-	return (j);
+       va_start( vl, str );
+  while (str && str[i])
+  {
+    if(str[i] == '%')
+    {
+      i++;
+      switch (str[i])
+      {
+        /* Convert char */
+        case 'c':
+        {
+          buff[j] = (char)va_arg( vl, int );
+          j++;
+          break;
+        }
+        /* Convert decimal */
+        case 'd':
+        {
+          print_int(va_arg( vl, int ), tmp, 10);
+          strcpy(&buff[j], tmp);
+          j += strlen(tmp);
+          break;
+        }
+        case 'i':
+        {
+            print_int(va_arg( vl, int ), tmp, 10);
+          strcpy(&buff[j], tmp);
+          j += strlen(tmp);
+          break;
+        }
+            /* Convert unsigned decimal */
+        case 'u':
+         {
+            _itoa(va_arg(vl, int), tmp, 10, true);
+            strcpy(&buff[j], tmp);
+            j += strlen(tmp);
+            break;
+        }
+            /* Convert unsigned octal */
+        case 'o':
+        {
+            _itoa(va_arg(vl, int), tmp, 8, true);
+            strcpy(&buff[j], tmp);
+            j += strlen(tmp);
+            break;
+        }
+        case 'x':
+        {
+            _itoa(va_arg(vl, int), tmp, 16, true);
+            strcpy(&buff[j], tmp);
+            for (int k = j; buff[k] != '\0'; k++)
+            {
+            buff[k] = tolower(buff[k]);
+            }
+
+            j += strlen(tmp);
+            break;
+
+        }
+        case 'X':
+        {
+            _itoa(va_arg(vl, int), tmp, 16, true);
+            strcpy(&buff[j], tmp);
+             j += strlen(tmp);
+            for (int k = j; buff[k] != '\0'; k++)
+            {
+                    buff[k] = toupper(buff[k]);
+            }
+            break;
+        }
+        case 'p':
+        {
+            _itoa(va_arg(vl, int), tmp, 16, true);
+            strcpy(&buff[j], tmp);
+            j += strlen(tmp);
+            break;
+        }
+        case '%':
+        {
+            print_char('%');
+            break;
+        }
+        case 'r':
+        {
+            str_arg = va_arg( vl, char *);
+          print_str(str_arg);
+
+            break;
+        }
+        /* copy string */
+        case 's': {
+          str_arg = va_arg( vl, char* );
+          strcpy(&buff[j], str_arg);
+          j += strlen(str_arg);
+          break;
+        }
+      }
+    }
+    else
+    {
+      buff[j] =str[i];
+      j++;
+    }
+    i++;
+  }
+  write(fileno(stdout),buff,j );
+  va_end(vl);
+  return j;
 }
