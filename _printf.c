@@ -9,20 +9,32 @@
 #include "main.h"
 
 /**
+ * print_char - prints a character
+ * @c: character to print
+ *
+ * Return: void
+ */
+
+void print_char(char c)
+{
+	write(1, &c, 1);
+}
+
+/**
  *_printf - This is a complete replica of the printf function
  *@format: The arguements formats
  *
  *Return: always zero
  */
 
-int _printf (const char * str, ...)
+int _printf (const char * format, ...)
 {
-	va_list arg;
+	va_list vl;
 	int i = 0, j = 0, k;
-	const char *countchar;
 	char *s;
        char buff[100] = {0}, tmp[20];
        char *str_arg;
+       const char * str = format;
 
        va_start( vl, str );
   while (str && str[i])
@@ -43,23 +55,23 @@ int _printf (const char * str, ...)
         case 'd':
         {
           print_int(va_arg( vl, int ), tmp, 10);
-          strcpy(&buff[j], tmp);
-          j += strlen(tmp);
+          _strcpy(&buff[j], tmp);
+          j += _strlen(tmp);
           break;
         }
         case 'i':
         {
             print_int(va_arg( vl, int ), tmp, 10);
-          strcpy(&buff[j], tmp);
-          j += strlen(tmp);
+          _strcpy(&buff[j], tmp);
+          j += _strlen(tmp);
           break;
         }
             /* Convert unsigned decimal */
         case 'u':
          {
             _itoa(va_arg(vl, int), tmp, 10, true);
-            strcpy(&buff[j], tmp);
-            j += strlen(tmp);
+            _strcpy(&buff[j], tmp);
+            j += _strlen(tmp);
             break;
         }
             /* Convert unsigned octal */
@@ -74,7 +86,7 @@ int _printf (const char * str, ...)
         {
             _itoa(va_arg(vl, int), tmp, 16, true);
             strcpy(&buff[j], tmp);
-            for (int k = j; buff[k] != '\0'; k++)
+            for (k = j; buff[k] != '\0'; k++)
             {
             buff[k] = tolower(buff[k]);
             }
@@ -86,19 +98,19 @@ int _printf (const char * str, ...)
         case 'X':
         {
             _itoa(va_arg(vl, int), tmp, 16, true);
-            strcpy(&buff[j], tmp);
-             j += strlen(tmp);
-            for (int k = j; buff[k] != '\0'; k++)
+            _strcpy(&buff[j], tmp);
+             j += _strlen(tmp);
+            for (k = j; buff[k] != '\0'; k++)
             {
-                    buff[k] = toupper(buff[k]);
+                    buff[k] = _toupper(buff[k]);
             }
             break;
         }
         case 'p':
         {
             _itoa(va_arg(vl, int), tmp, 16, true);
-            strcpy(&buff[j], tmp);
-            j += strlen(tmp);
+            _strcpy(&buff[j], tmp);
+            j += _strlen(tmp);
             break;
         }
         case '%':
@@ -116,20 +128,20 @@ int _printf (const char * str, ...)
         /* copy string */
         case 's': {
           str_arg = va_arg( vl, char* );
-          strcpy(&buff[j], str_arg);
-          j += strlen(str_arg);
+          _strcpy(&buff[j], str_arg);
+          j += _strlen(str_arg);
           break;
         }
       }
     }
     else
     {
-      buff[j] =str[i];
+      buff[j] = str[i];
       j++;
     }
     i++;
   }
-  write(fileno(stdout),buff,j );
+  write(fileno(stdout), buff, j);
   va_end(vl);
   return j;
 }

@@ -10,7 +10,7 @@
  * Return: buffer character string
  */
 
-char *itoa(int i, char *strout, int base, bool isUnsigned)
+char *_itoa(int i, char *strout, int base, bool isUnsigned)
 {
 	int digit, sign = 0;
 	char *str = strout;

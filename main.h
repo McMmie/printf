@@ -1,5 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdbool.h>
+#include <stdint.h>
 /****FUNCTIONS****/
 int _printf(const char *format, ...);
 
@@ -11,7 +13,7 @@ char *_strcpy(char *s1, char *s2);
 
 int _strlen(char *s);
 
-void int_to_binary(unsigned int num);
+/*void int_to_binary(unsigned int num);*/
 
 char *print_int(int i, char *outstr, int base);
 
@@ -21,9 +23,9 @@ void print_float(double val, int prec);
 
 void print_ptr(void *value);
 
-void rot13(char *str);
+/*void rot13(char *str);*/
 
-char *itoa(int i, char *strout, int base, bool isUnsigned);
+char *_itoa(int i, char *strout, int base, bool isUnsigned);
 
 int _buffer(char *buff, int size);
 
