@@ -7,7 +7,7 @@
  * Return: uppercase string
  */
 
-char *_toupper(char *str)
+char *to_upper(char *str)
 {
 	int i = 0;
 	while (str[i] != '\0')

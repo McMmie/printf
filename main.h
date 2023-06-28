@@ -29,6 +29,8 @@ char *_itoa(int i, char *strout, int base, bool isUnsigned);
 
 int _buffer(char *buff, int size);
 
-char *_toupper(char *str);
+char *to_upper(char *str);
+
+#define r c
 
 #endif

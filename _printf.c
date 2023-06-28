@@ -31,17 +31,16 @@ int _printf (const char * format, ...)
 {
 	va_list vl;
 	int i = 0, j = 0, k;
-	char *s;
        char buff[100] = {0}, tmp[20];
        char *str_arg;
        const char * str = format;
 
-       va_start( vl, str );
-  while (str && str[i])
-  {
-    if(str[i] == '%')
-    {
-      i++;
+       va_start( vl, format);
+       while (str && str[i])
+  	{
+    	if(str[i] == '%')
+    	{
+      	i++;
       switch (str[i])
       {
         /* Convert char */
