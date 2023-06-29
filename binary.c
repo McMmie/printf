@@ -9,11 +9,12 @@
 
 void int_to_binary(unsigned int num)
 {
-	int arraynum[24], i,j;
+	int arraynum[24], i, j;
+	char digit;
 
 	if (num == 0)
 	{
-		_putchar(0);
+		write(1, "0", 1);
 	}
 	i = 0;
 
@@ -24,7 +25,8 @@ void int_to_binary(unsigned int num)
 	}
 	for (j = i - 1; j >= 0; j--)
 	{
-		_putchar(arraynum[j]);
+		digit = '0' + digit;
+		write(1, &digit, 1);
 	}
 
 }

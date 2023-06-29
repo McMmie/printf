@@ -15,8 +15,8 @@ char *_itoa(int i, char *strout, int base, bool isUnsigned)
 	int digit, sign = 0;
 	char *str = strout;
 
-	unsigned int u = (isUnsigned) ? (unsigned int)i  : (unsigned int)(-(i + 1)) + 1;
-		if (i < 0 && !isUnsigned)
+	unsigned int u = (signed int isUnsigned) ? (unsigned int)i  : (-(i + 1)) + 1;
+		if (i < 0 && !(signed int isUnsigned))
 		{
 			sign = 1;
 			u = (-(i + 1)) + 1;

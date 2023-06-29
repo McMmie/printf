@@ -31,6 +31,8 @@ int _buffer(char *buff, int size);
 
 char *to_upper(char *str);
 
-#define r c
+char *to_lower(char *str);
+
+void int_to_binary(unsigned int num);
 
 #endif
