@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * int_to_binary - converts unsigned int into binary
@@ -10,6 +11,7 @@
 void int_to_binary(unsigned int num)
 {
 	int arraynum[24], i, j;
+	
 	char digit;
 
 	if (num == 0)
@@ -20,12 +22,13 @@ void int_to_binary(unsigned int num)
 
 	while (num > 0)
 	{
-		arraynum[i++] = num % 2;
+		arraynum[i] = num % 2;
+		i++;
 		num /= 2;
 	}
 	for (j = i - 1; j >= 0; j--)
 	{
-		digit = '0' + digit;
+		digit = '0' + arraynum[j];
 		write(1, &digit, 1);
 	}
 
